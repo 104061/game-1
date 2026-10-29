@@ -1,3 +1,22 @@
 [gd_scene format=3 uid="uid://dtb3ibigsis32"]
 
-[node name="bullet" type="Node2D" unique_id=1340400265]
+[ext_resource type="Script" uid="uid://cgg74c6ifin3t" path="res://scripts/bullet.gd" id="1_mkf8s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oaum5"]
+size = Vector2(12, 9)
+
+[node name="bullet" type="Area2D" unique_id=1359824693]
+collision_mask = 2
+script = ExtResource("1_mkf8s")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=609307735]
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 4.0
+offset_bottom = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=658400803]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_oaum5")
+
+[connection signal="body_entered" from="." to="." method="_on_bullet_body_entered"]

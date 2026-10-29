@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://do4beinesuwts"]
+
+[ext_resource type="Script" uid="uid://u51gjpuum28h" path="res://scripts/enemy.gd" id="1_7p1mj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oaum5"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfaii"]
+size = Vector2(17.74194, 19.166674)
+
+[node name="enemy" type="CharacterBody2D" unique_id=441779532 node_paths=PackedStringArray("health_bar", "timer") groups=["mobs"]]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_7p1mj")
+health_bar = NodePath("ProgressBar")
+timer = NodePath("Timer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1807038238]
+shape = SubResource("RectangleShape2D_oaum5")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=888747802]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0.7952623, 0, 0.17585474, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1039951783]
+offset_left = -21.0
+offset_top = -28.0
+offset_right = 21.0
+offset_bottom = -22.0
+value = 100.0
+show_percentage = false
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2009303743]
+scale = Vector2(1.2799999, 1.3199992)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=870783376]
+position = Vector2(-5.9604645e-08, -1.1324883e-06)
+scale = Vector2(2.4799995, 2.3999991)
+shape = SubResource("RectangleShape2D_gfaii")
+
+[node name="Timer" type="Timer" parent="." unique_id=2127001506]
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="on_player_body_enter"]
+[connection signal="body_exited" from="Area2D" to="." method="on_player_body_exit"]
+[connection signal="timeout" from="Timer" to="." method="on_attack_timeout"]
